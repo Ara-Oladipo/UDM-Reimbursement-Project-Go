@@ -2,28 +2,17 @@
   <section class="signup-page">
     <section class="left-section">
       <div class="udmercy-logo-wrapper">
-        <img
-          src="../assets/detroit-mercy-logo.png"
-          alt="Detroit mercy logo"
-          class="udmercy-logo"
-        />
+        <img src="../assets/detroit-mercy-logo.png" alt="Detroit mercy logo" class="udmercy-logo" />
       </div>
     </section>
     <section class="right-section">
       <div class="udmercy-logo-wrapper-mobile">
-        <img
-          src="../assets/detroit-mercy-logo.png"
-          alt="Detroit mercy logo"
-          class="udmercy-logo-mobile"
-        />
+        <img src="../assets/detroit-mercy-logo.png" alt="Detroit mercy logo" class="udmercy-logo-mobile" />
       </div>
       <h3 class="signup-title">Detroit Mercy Reimbursement System</h3>
       <section class="signup-form">
         <span v-if="!basicQuestionsSectionIsFinished">
-          <BasicQuestionsSection
-            :user-signup-data="userSignupData"
-            @continue="sendConfirmationEmail"
-          />
+          <BasicQuestionsSection :user-signup-data="userSignupData" @continue="sendConfirmationEmail" />
           <h3 v-if="verifyingInformation">Verifying user information...</h3>
         </span>
         <article v-else>
@@ -36,16 +25,11 @@
           </h4>
         </article>
       </section>
-      <span
-        v-if="!basicQuestionsSectionIsFinished"
-        class="account-feedback-message"
-      >
+      <span v-if="!basicQuestionsSectionIsFinished" class="account-feedback-message">
         <br />
-        <router-link to="/" class="already-have-account"
-          >Already have an Account</router-link
-        >
+        <router-link to="/" class="already-have-account">Already have an Account</router-link>
         <h5 class="required-field-note">
-          Note: All required fields must be filled
+          Note: All required fields (*) must be filled
         </h5>
       </span>
     </section>
@@ -57,42 +41,33 @@ import BasicQuestionsSection from "../components/signup-flow/BasicQuestionsSecti
 import axios from "axios";
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { UserData } from "../types/types";
+import { UserDataPreVerification } from "../types/types";
 
 const router = useRouter();
 let verifyingInformation = ref<boolean>(false);
 let basicQuestionsSectionIsFinished = ref<boolean>(false);
-let userSignupData = reactive<UserData>({
-  firstName: "",
-  lastName: "",
-  workEmail: "",
-  employmentNumber: null,
-  department: "",
-  mailingAddress: "",
-  phoneNumber: "",
-  password: "",
-  postalCode: "",
-  city: "",
-  state: "",
-  country: "",
-  foapaDetails: [],
+let userSignupData = reactive<UserDataPreVerification>({
+  firstName: "Bob",
+  lastName: "bobbingon",
+  workEmail: "bobby",
+  employmentNumber: 21324324,
+  department: "Computer Science",
+  phoneNumber: 3232223323,
 });
 
 function sendConfirmationEmail() {
   axios
     .post(
-      "https://udm-reimbursement-project.onrender.com/api/sendConfirmationEmail",
-      {
-        userSignupData,
-      }
+      `${import.meta.env.VITE_API_URL}/api/send-confirmation-email`, userSignupData,
     )
     .then((res) => {
-      verifyingInformation.value = true;
-      basicQuestionsSectionIsFinished.value = true;
+      // verifyingInformation.value = true;
+      // basicQuestionsSectionIsFinished.value = true;
     })
     .catch((err) => {
+      console.log(err)
       verifyingInformation.value = false;
-      alert(err.data.message);
+      alert(err?.response?.data || "An error has occured, please try again");
     });
 }
 

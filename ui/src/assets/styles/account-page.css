@@ -81,6 +81,7 @@ input {
   margin-top: 20px;
   color: rgb(179, 6, 6);
 }
+
 .udmercy-logo-wrapper {
   border: 1px solid #ffffff;
   padding: 30px;
@@ -122,6 +123,7 @@ input {
 .input-field label {
   padding-top: 10px;
 }
+
 .input-field input,
 .input-field select {
   padding-left: 20px;
@@ -178,6 +180,7 @@ input {
 .relative {
   position: relative;
 }
+
 .signup-button {
   background-color: var(--udmercy-blue);
   color: white;
@@ -215,10 +218,12 @@ input {
   font-weight: 400;
   font-size: 14px;
 }
+
 @media (max-width: 1350px) {
   .udmercy-logo {
     display: none;
   }
+
   .left-section {
     display: none;
   }
@@ -229,6 +234,7 @@ input {
     padding-left: 75px;
   }
 }
+
 @media (max-width: 900px) {
   .input-field-wrapper {
     width: auto;

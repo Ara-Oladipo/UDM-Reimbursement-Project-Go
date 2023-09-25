@@ -13,6 +13,7 @@ export function isValidString(value) {
   }
 }
 
+
 export function isNotEmpty(value) {
   if (value === undefined || value === null) value = "";
   value = String(value);

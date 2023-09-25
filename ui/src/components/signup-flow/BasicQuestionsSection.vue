@@ -1,30 +1,19 @@
 <template>
   <h3 class="signup-title-description">Basic Questions</h3>
-  <Form @submit="progress">
+  <Form @submit="progress" class="basic-questions-form">
     <div class="input-field-wrapper">
       <div class="input-field">
         <label for="first-name">First Name:*</label>
         <span>
-          <Field
-            type="text"
-            name="first-name"
-            :rules="isValidString"
-            id="first-name"
-            v-model="userSignupData.firstName"
-          />
+          <Field type="text" name="first-name" :rules="isValidString" id="first-name"
+            v-model="userSignupData.firstName" />
           <ErrorMessage name="first-name" class="error-field" />
         </span>
       </div>
       <div class="input-field">
         <label for="first-name">Last Name:*</label>
         <span>
-          <Field
-            type="text"
-            name="last-name"
-            :rules="isValidString"
-            id="last-name"
-            v-model="userSignupData.lastName"
-          />
+          <Field type="text" name="last-name" :rules="isValidString" id="last-name" v-model="userSignupData.lastName" />
           <ErrorMessage name="last-name" class="error-field" />
         </span>
       </div>
@@ -33,13 +22,8 @@
       <div class="input-field">
         <label for="phone-number" class="mt-0">Phone Number:*</label>
         <span>
-          <Field
-            type="text"
-            name="phone-number"
-            id="phone-number"
-            :rules="isValidPhoneNumber"
-            v-model="userSignupData.phoneNumber"
-          />
+          <Field type="text" name="phone-number" id="phone-number" :rules="isValidPhoneNumber"
+            v-model.number="userSignupData.phoneNumber" />
           <ErrorMessage name="phone-number" class="error-field" />
         </span>
       </div>
@@ -47,13 +31,8 @@
         <label for="work-email">Work Email: *</label>
         <span>
           <span class="work-email-input-field">
-            <Field
-              type="text"
-              :rules="isValidString"
-              name="work-email"
-              id="work-email"
-              v-model="userSignupData.workEmail"
-            />
+            <Field type="text" :rules="isValidString" name="work-email" id="work-email"
+              v-model="userSignupData.workEmail" />
             <h6 class="work-email-descriptor">@udmercy.edu</h6>
           </span>
           <ErrorMessage name="work-email" class="error-field" />
@@ -68,13 +47,8 @@
             <span class="employment-number-section">
               <h3>T</h3>
             </span>
-            <Field
-              type="text"
-              :rules="isValidEmploymentNumber"
-              name="employment-number"
-              id="employment-number"
-              v-model="userSignupData.employmentNumber"
-            />
+            <Field type="text" :rules="isValidEmploymentNumber" name="employment-number" id="employment-number"
+              v-model.number="userSignupData.employmentNumber" />
           </span>
           <ErrorMessage name="employment-number" class="error-field" />
         </span>
@@ -82,13 +56,7 @@
       <div class="input-field">
         <label for="department">Department: *</label>
         <span>
-          <Field
-            name="department"
-            id="department"
-            as="select"
-            :rules="isValidString"
-            v-model="userSignupData.department"
-          >
+          <Field name="department" id="department" as="select" :rules="isValidString" v-model="userSignupData.department">
             <option :value="department" v-for="department in departments">
               {{ department }}
             </option>
@@ -116,10 +84,10 @@ import {
   isValidString,
   isValidPhoneNumber,
 } from "../../utils/validators";
-import { UserData } from "../../types/types";
+import { UserDataPreVerification } from "../../types/types";
 
 const { userSignupData } = defineProps<{
-  userSignupData: UserData;
+  userSignupData: UserDataPreVerification;
 }>();
 
 let validatingSignupFields = ref<boolean>(false);
@@ -168,8 +136,16 @@ function progress() {
 
 <style scoped>
 @import url("../../assets/styles/signup-page.css");
+
 .input-field,
 .work-email-section {
   height: 70px;
+}
+
+@media (max-width: 400px) {
+  .validating-signup-field {
+    width: 232px;
+    text-align: center;
+  }
 }
 </style>

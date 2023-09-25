@@ -18,6 +18,7 @@ export type UserDataPreVerification = {
   firstName: string;
   lastName: string;
   workEmail: string;
+  phoneNumber: number;
   employmentNumber: number | null;
   department: string;
 };
