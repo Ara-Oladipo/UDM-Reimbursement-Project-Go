@@ -15,11 +15,11 @@ export type UserData = {
 };
 
 export type UserDataPreVerification = {
-  firstName: string;
-  lastName: string;
-  workEmail: string;
-  phoneNumber: number;
-  employmentNumber: number | null;
+  first_name: string;
+  last_name: string;
+  work_email: string;
+  employment_number: number | null;
+  phone_number: number | null;
   department: string;
 };
 

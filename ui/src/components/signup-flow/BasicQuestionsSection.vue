@@ -6,14 +6,14 @@
         <label for="first-name">First Name:*</label>
         <span>
           <Field type="text" name="first-name" :rules="isValidString" id="first-name"
-            v-model="userSignupData.firstName" />
+            v-model="userSignupData.first_name" />
           <ErrorMessage name="first-name" class="error-field" />
         </span>
       </div>
       <div class="input-field">
         <label for="first-name">Last Name:*</label>
         <span>
-          <Field type="text" name="last-name" :rules="isValidString" id="last-name" v-model="userSignupData.lastName" />
+          <Field type="text" name="last-name" :rules="isValidString" id="last-name" v-model="userSignupData.last_name" />
           <ErrorMessage name="last-name" class="error-field" />
         </span>
       </div>
@@ -23,7 +23,7 @@
         <label for="phone-number" class="mt-0">Phone Number:*</label>
         <span>
           <Field type="text" name="phone-number" id="phone-number" :rules="isValidPhoneNumber"
-            v-model.number="userSignupData.phoneNumber" />
+            v-model.number="userSignupData.phone_number" />
           <ErrorMessage name="phone-number" class="error-field" />
         </span>
       </div>
@@ -32,7 +32,7 @@
         <span>
           <span class="work-email-input-field">
             <Field type="text" :rules="isValidString" name="work-email" id="work-email"
-              v-model="userSignupData.workEmail" />
+              v-model="userSignupData.work_email" />
             <h6 class="work-email-descriptor">@udmercy.edu</h6>
           </span>
           <ErrorMessage name="work-email" class="error-field" />
@@ -48,7 +48,7 @@
               <h3>T</h3>
             </span>
             <Field type="text" :rules="isValidEmploymentNumber" name="employment-number" id="employment-number"
-              v-model.number="userSignupData.employmentNumber" />
+              v-model.number="userSignupData.employment_number" />
           </span>
           <ErrorMessage name="employment-number" class="error-field" />
         </span>
@@ -107,18 +107,20 @@ const departments = [
   "Chemistry",
   "Robotics and Mechatronic Systems Engineering",
 ];
+
 const emits = defineEmits(["continue"]);
 
 function progress() {
   validatingSignupFields.value = true;
   signupError.value = false;
   signupErrorMessage.value = "";
+
   axios
     .post(
       "https://udm-reimbursement-project.onrender.com/api/verifySignupBasicInformation",
       {
-        employmentNumber: userSignupData.employmentNumber,
-        workEmail: userSignupData.workEmail,
+        employmentNumber: userSignupData.employment_number,
+        workEmail: userSignupData.work_email,
       }
     )
     .then((res) => {

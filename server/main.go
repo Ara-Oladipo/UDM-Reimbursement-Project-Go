@@ -11,6 +11,6 @@ import (
 func main() {
 	app := application.New(":8080")
 
-	fmt.Println("Starting server..")
+	fmt.Println("Server Started")
 	log.Fatal(http.ListenAndServe(app.Addr, app.Routes))
 }

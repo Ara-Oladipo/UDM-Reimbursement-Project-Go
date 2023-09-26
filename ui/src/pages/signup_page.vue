@@ -19,7 +19,7 @@
           <h3 class="thanks-for-signing-up-msg">Thank you for signing up!</h3>
           <h4 class="email-confirmation-text">
             A confirmation email has being sent to
-            {{ userSignupData.workEmail.trim() }}@udmercy.edu. You should
+            {{ userSignupData.work_email.trim() }}@udmercy.edu. You should
             receive an email in 3-5 minutes. Please check your spam/junk folder
             if it does not arrive. You can close out of this page.
           </h4>
@@ -47,12 +47,12 @@ const router = useRouter();
 let verifyingInformation = ref<boolean>(false);
 let basicQuestionsSectionIsFinished = ref<boolean>(false);
 let userSignupData = reactive<UserDataPreVerification>({
-  firstName: "Bob",
-  lastName: "bobbingon",
-  workEmail: "bobby",
-  employmentNumber: 21324324,
+  first_name: "Bob",
+  last_name: "bobbingon",
+  work_email: "bobby",
+  employment_number: 21324324,
   department: "Computer Science",
-  phoneNumber: 3232223323,
+  phone_number: 3232223323,
 });
 
 function sendConfirmationEmail() {
