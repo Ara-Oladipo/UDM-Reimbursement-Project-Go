@@ -81,11 +81,14 @@ func sendEmail(userData *UserData, token string) error {
 	m.SetHeader("To", userData.WorkEmail)
 	m.SetHeader("Subject", "Verify your UDM Email")
 
+	// Alter token so that it is embeddable in a url
+	token = strings.ReplaceAll(token, ".", "$")
+
 	url := fmt.Sprintf("http://localhost:5173/complete-verification/%s", token)
 
 	mailTemplate := fmt.Sprintf(`
 	<div style="background: white">
-	<h2 style="font-weight: 500">Verify your Account</h2>
+	<h3 style="font-weight: 500">Verify your Account</h3>
 	<h4 style="font-weight: 300">Hello %s,</h4>
 	<h4 style="font-weight: 300">Thanks for signing up for the University of Detroit Mercy Reimbursement System!</h4>
 	<h4 style="font-weight: 300">You can verify your account with this link</h4>
@@ -123,6 +126,8 @@ func SendConfirmationEmail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	defer r.Body.Close()
+
 	//Validate struct format
 	if err := validateStruct(&userData); err != nil {
 		http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
@@ -132,6 +137,7 @@ func SendConfirmationEmail(w http.ResponseWriter, r *http.Request) {
 	// Sanitize user data
 	userData = sanitizeUserData(&userData)
 
+	//TODO: Replace with redis
 	//Create JWTs
 	token, err := createJWT(&userData)
 

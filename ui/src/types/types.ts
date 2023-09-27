@@ -1,17 +1,17 @@
 export type UserData = {
-  firstName: string;
-  lastName: string;
-  workEmail: string;
-  employmentNumber: number | null;
+  first_name: string;
+  last_name: string;
+  work_email: string;
+  employment_number: number | null;
   department: string;
-  mailingAddress: string;
-  phoneNumber: string;
+  mailing_address: string;
+  phone_number: string;
   password: string;
-  postalCode: string;
+  postal_code: string;
   city: string;
   state: string;
   country: string;
-  foapaDetails: FoapaStuff[];
+  foapa_details: FoapaStuff[];
 };
 
 export type UserDataPreVerification = {
